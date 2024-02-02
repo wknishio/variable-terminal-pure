@@ -7,7 +7,7 @@ This software is a java remote computer administration tool.
 It has various functions inspired by TELNET, FTP, SSH, NETBUS, VNC,
 but its incompatible with those tools/protocols/standards.
 
-This is the pure version intended to run without jna native functions
+This is the pure java version intended to run without jna native functions.
 
 Some of the available features are:
 
