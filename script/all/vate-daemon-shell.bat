@@ -1,1 +1,1 @@
-java -cp vate-all-shell.jar org.vash.vate.server.startup.VTServerDaemonStandardStart %*
+java -cp vate-pure-all-shell.jar org.vash.vate.server.startup.VTServerDaemonStandardStart %*

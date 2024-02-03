@@ -1,1 +1,1 @@
-java -cp vate-all-shell.jar org.vash.vate.client.startup.VTClientStandardStart %*
+java -cp vate-pure-all-shell.jar org.vash.vate.client.startup.VTClientStandardStart %*

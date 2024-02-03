@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project default="build" name="Ant Build for Project Variable-Terminal">
+<project default="build" name="Ant Build for Project Variable-Terminal-Pure">
 	<!--this file was created by Eclipse Runnable JAR Export Wizard-->
 	<!--ANT 1.7 is required                                        -->
 	<tstamp>
@@ -68,7 +68,7 @@
 		
 		<delete dir="dist/lib"/>
 		<mkdir dir="dist/lib"/>
-		<jar destfile="dist/lib/vate-lib.jar" update="false">
+		<jar destfile="dist/lib/vate-pure-lib.jar" update="false">
 			<manifest>
 				<attribute name="Built-By" value="William Kendi Nishio"/>
 				<attribute name="Build-Date" value="${build.time.era} ${build.time.date}"/>
@@ -82,7 +82,7 @@
 			-->
 		</jar>
 		
-		<jar destfile="dist/lib/vate-util.jar" update="false">
+		<jar destfile="dist/lib/vate-pure-util.jar" update="false">
 			<manifest>
 				<attribute name="Built-By" value="William Kendi Nishio"/>
 				<attribute name="Build-Date" value="${build.time.era} ${build.time.date}"/>
@@ -110,7 +110,7 @@
 			<fileset dir="conf/client"/>
 		</copy>
 		
-		<jar destfile="dist/all/vate-all-console.jar" filesetmanifest="mergewithoutmain" update="false">
+		<jar destfile="dist/all/vate-pure-all-console.jar" filesetmanifest="mergewithoutmain" update="false">
 			<manifest>
 				<attribute name="Built-By" value="William Kendi Nishio"/>
 				<attribute name="Build-Date" value="${build.time.era} ${build.time.date}"/>
@@ -125,7 +125,7 @@
 			-->
 		</jar>
 		
-		<jar destfile="dist/all/vate-all-shell.jar" filesetmanifest="mergewithoutmain" update="false">
+		<jar destfile="dist/all/vate-pure-all-shell.jar" filesetmanifest="mergewithoutmain" update="false">
 			<manifest>
 				<attribute name="Built-By" value="William Kendi Nishio"/>
 				<attribute name="Build-Date" value="${build.time.era} ${build.time.date}"/>
@@ -149,7 +149,7 @@
 			<fileset dir="conf/client"/>
 		</copy>
 		
-		<jar destfile="dist/client/vate-client-console.jar" filesetmanifest="mergewithoutmain" update="false">
+		<jar destfile="dist/client/vate-pure-client-console.jar" filesetmanifest="mergewithoutmain" update="false">
 			<manifest>
 				<attribute name="Built-By" value="William Kendi Nishio"/>
 				<attribute name="Build-Date" value="${build.time.era} ${build.time.date}"/>
@@ -161,7 +161,7 @@
 			<zipgroupfileset dir="lib" excludes="META-INF/*.SF,META-INF/*.DSA,META-INF/*.RSA"/>
 		</jar>
 		
-		<jar destfile="dist/client/vate-client-shell.jar" filesetmanifest="mergewithoutmain" update="false">
+		<jar destfile="dist/client/vate-pure-client-shell.jar" filesetmanifest="mergewithoutmain" update="false">
 			<manifest>
 				<attribute name="Built-By" value="William Kendi Nishio"/>
 				<attribute name="Build-Date" value="${build.time.era} ${build.time.date}"/>
@@ -173,7 +173,7 @@
 			<zipgroupfileset dir="lib" excludes="META-INF/*.SF,META-INF/*.DSA,META-INF/*.RSA"/>
 		</jar>
 				
-		<jar destfile="dist/client/vate-agent-console.jar" filesetmanifest="mergewithoutmain" update="false">
+		<jar destfile="dist/client/vate-pure-agent-console.jar" filesetmanifest="mergewithoutmain" update="false">
 			<manifest>
 				<attribute name="Built-By" value="William Kendi Nishio"/>
 				<attribute name="Build-Date" value="${build.time.era} ${build.time.date}"/>
@@ -185,7 +185,7 @@
 			<zipgroupfileset dir="lib" excludes="META-INF/*.SF,META-INF/*.DSA,META-INF/*.RSA"/>
 		</jar>
 		
-		<jar destfile="dist/client/vate-agent-shell.jar" filesetmanifest="mergewithoutmain" update="false">
+		<jar destfile="dist/client/vate-pure-agent-shell.jar" filesetmanifest="mergewithoutmain" update="false">
 			<manifest>
 				<attribute name="Built-By" value="William Kendi Nishio"/>
 				<attribute name="Build-Date" value="${build.time.era} ${build.time.date}"/>
@@ -206,7 +206,7 @@
 			<fileset dir="conf/server"/>
 		</copy>
 			
-		<jar destfile="dist/server/vate-server-console.jar" filesetmanifest="mergewithoutmain" update="false">
+		<jar destfile="dist/server/vate-pure-server-console.jar" filesetmanifest="mergewithoutmain" update="false">
 			<manifest>
 				<attribute name="Built-By" value="William Kendi Nishio"/>
 				<attribute name="Build-Date" value="${build.time.era} ${build.time.date}"/>
@@ -221,7 +221,7 @@
 			-->
 		</jar>
 		
-		<jar destfile="dist/server/vate-server-shell.jar" filesetmanifest="mergewithoutmain" update="false">
+		<jar destfile="dist/server/vate-pure-server-shell.jar" filesetmanifest="mergewithoutmain" update="false">
 			<manifest>
 				<attribute name="Built-By" value="William Kendi Nishio"/>
 				<attribute name="Build-Date" value="${build.time.era} ${build.time.date}"/>

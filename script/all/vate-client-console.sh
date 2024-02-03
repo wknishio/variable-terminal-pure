@@ -1,2 +1,2 @@
 #/bin/sh
-java -cp vate-all-console.jar org.vash.vate.client.startup.VTClientGraphicalStart $* &
+java -cp vate-pure-all-console.jar org.vash.vate.client.startup.VTClientGraphicalStart $* &
