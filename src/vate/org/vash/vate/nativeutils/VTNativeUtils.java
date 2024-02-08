@@ -4,6 +4,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Map.Entry;
+
+import org.vash.vate.audio.VTAudioBeeper;
 //import org.vash.vate.audio.VTAudioBeeper;
 //import org.vash.vate.nativeutils.bsd.VTBSDNativeUtils;
 //import org.vash.vate.nativeutils.linux.VTLinuxNativeUtils;
@@ -21,6 +23,9 @@ public class VTNativeUtils
   private static String[] virtualEnvironmentVariables;
   private static Properties systemPropertiesBackup;
   private static VTNativeUtilsImplementation nativeUtils;
+  
+  private static final int SAMPLE_RATE_HERTZ = 16000;
+  private static final int SAMPLE_SIZE_BITS = 8;
   // public abstract int true_isatty(int fd);
   
   public synchronized static void initialize()
@@ -31,35 +36,10 @@ public class VTNativeUtils
     }
     try
     {
-//      if (Platform.isWindows())
-//      {
-//        nativeUtils = new VTWin32NativeUtils();
-//      }
-//      else if (Platform.isLinux() || Platform.isAndroid())
-//      {
-//        nativeUtils = new VTLinuxNativeUtils();
-//      }
-//      else if (Platform.isFreeBSD() || Platform.isOpenBSD() || Platform.isNetBSD() || Platform.iskFreeBSD())
-//      {
-//        nativeUtils = new VTBSDNativeUtils();
-//      }
-//      else if (Platform.isSolaris())
-//      {
-//        nativeUtils = new VTSunOSNativeUtils();
-//      }
-//      else if (Platform.isMac())
-//      {
-//        nativeUtils = new VTMacNativeUtils();
-//      }
-//      else
-//      {
-//        
-//      }
       nativeUtils = new VTNullNativeUtils();
     }
     catch (Throwable e)
     {
-      // e.printStackTrace();
       nativeUtils = new VTNullNativeUtils();
     }
   }
@@ -101,52 +81,22 @@ public class VTNativeUtils
   
   public static boolean beep(int freq, int dur, boolean block)
   {
-    // block = true;
     if (checkNativeUtils())
     {
-      // needs root user on unix
-      // long start = System.currentTimeMillis();
       boolean nativeBeep = nativeUtils.beep(freq, dur, block);
-      // nativeBeep = false;
-      // long end = System.currentTimeMillis();
-      // System.out.println("beep1:" + (end - start));
-      // boolean nativeBeep = false;
       if (!nativeBeep)
       {
-//        try
-//        {
-//          Thread.sleep(500);
-//        }
-//        catch (InterruptedException e)
-//        {
-//        }
-        // use javax.sound to generate sine wave on default audio device
-        // start = System.currentTimeMillis();
-        //boolean soundBeep = VTAudioBeeper.beep(8000, freq, dur, block);
-        // end = System.currentTimeMillis();
-        // System.out.println("beep2:" + (end - start));
-        return false;
+        return VTAudioBeeper.beep(SAMPLE_RATE_HERTZ, SAMPLE_SIZE_BITS, freq, dur, block);
       }
       else
       {
         return true;
-        // start = System.currentTimeMillis();
-        // boolean soundBeep = VTAudioBeeper.beep(freq, dur, block);
-        // end = System.currentTimeMillis();
-        // System.out.println("beep2:" + (end - start));
-        // return soundBeep;
       }
     }
     else
     {
-      // use javax.sound to generate sine wave on default audio device
-      // long start = System.currentTimeMillis();
-      //boolean soundBeep = VTAudioBeeper.beep(8000, freq, dur, block);
-      // long end = System.currentTimeMillis();
-      // System.out.println("beep2:" + (end - start));
-      return false;
+      return VTAudioBeeper.beep(SAMPLE_RATE_HERTZ, SAMPLE_SIZE_BITS, freq, dur, block);
     }
-    // return false;
   }
   
   public static boolean openDiscDrive()
@@ -170,6 +120,10 @@ public class VTNativeUtils
             
           }
         }
+        else
+        {
+          // do nothing
+        }
       }
       else
       {
@@ -190,6 +144,10 @@ public class VTNativeUtils
         {
           
         }
+      }
+      else
+      {
+        // do nothing
       }
     }
     return false;
@@ -217,6 +175,10 @@ public class VTNativeUtils
             
           }
         }
+        else
+        {
+          // do nothing
+        }
       }
       else
       {
@@ -238,6 +200,10 @@ public class VTNativeUtils
         {
           
         }
+      }
+      else
+      {
+        // do nothing
       }
     }
     return false;
