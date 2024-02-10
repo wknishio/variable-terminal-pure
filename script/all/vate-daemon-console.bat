@@ -1,1 +1,1 @@
-java -cp vate-pure-all-console.jar org.vash.vate.server.startup.VTServerDaemonGraphicalStart %*
+java -cp vate-all-console.jar org.vash.vate.server.startup.VTServerDaemonGraphicalStart %*

@@ -1,2 +1,2 @@
 #/bin/sh
-nohup java -cp vate-pure-all-console.jar org.vash.vate.server.startup.VTServerDaemonGraphicalStart $* &
+nohup java -cp vate-all-console.jar org.vash.vate.server.startup.VTServerDaemonGraphicalStart $* &
