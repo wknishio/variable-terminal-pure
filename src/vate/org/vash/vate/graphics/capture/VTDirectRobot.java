@@ -9,7 +9,6 @@ import java.awt.Rectangle;
 import java.awt.Robot;
 import java.awt.Toolkit;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 public final class VTDirectRobot
@@ -43,7 +42,7 @@ public final class VTDirectRobot
     {
       try
       {
-        createRobot = Class.forName("sun.awt.ComponentFactory").getClass().getDeclaredMethod("createRobot", GraphicsDevice.class);
+        createRobot = Class.forName("sun.awt.ComponentFactory").getDeclaredMethod("createRobot", GraphicsDevice.class);
         parameterCount = 1;
       }
       catch (NoSuchMethodException e1)
@@ -60,15 +59,7 @@ public final class VTDirectRobot
         createRobot.setAccessible(true);
         robotPeer = createRobot.invoke(toolkit, device);
       }
-      catch (IllegalAccessException e)
-      {
-        robotPeer = null;
-      }
-      catch (IllegalArgumentException e)
-      {
-        robotPeer = null;
-      }
-      catch (InvocationTargetException e)
+      catch (Throwable t)
       {
         robotPeer = null;
       }
@@ -80,15 +71,7 @@ public final class VTDirectRobot
         createRobot.setAccessible(true);
         robotPeer = createRobot.invoke(toolkit, null, device);
       }
-      catch (IllegalAccessException e)
-      {
-        robotPeer = null;
-      }
-      catch (IllegalArgumentException e)
-      {
-        robotPeer = null;
-      }
-      catch (InvocationTargetException e)
+      catch (Throwable t)
       {
         robotPeer = null;
       }
