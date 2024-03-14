@@ -428,7 +428,7 @@ public class VTServerConnection
       {
         multiplexedConnectionOutputStream.close();
       }
-      catch (IOException e)
+      catch (Throwable e)
       {
         
       }
@@ -437,13 +437,9 @@ public class VTServerConnection
     {
       try
       {
-        multiplexedConnectionInputStream.stopPacketReader();
+        multiplexedConnectionInputStream.close();
       }
-      catch (IOException e)
-      {
-        
-      }
-      catch (InterruptedException e)
+      catch (Throwable e)
       {
         
       }
