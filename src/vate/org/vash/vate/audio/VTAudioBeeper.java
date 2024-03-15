@@ -325,11 +325,11 @@ public class VTAudioBeeper
   {
     if (block)
     {
-      return toneBlocking(sampleRate, sampleSizeBits, freq, msecs, 0.5);
+      return toneBlocking(sampleRate, sampleSizeBits, freq, msecs, vol);
     }
     else
     {
-      return toneThreaded(sampleRate, sampleSizeBits, freq, msecs, 0.5);
+      return toneThreaded(sampleRate, sampleSizeBits, freq, msecs, vol);
     }
   }
   
