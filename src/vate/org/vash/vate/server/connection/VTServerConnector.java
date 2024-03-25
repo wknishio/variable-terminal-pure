@@ -465,14 +465,10 @@ public class VTServerConnector implements Runnable
       {
         connection.setEncryptionType(VT.VT_CONNECTION_ENCRYPT_ZUC256);
       }
-      else if (encryptionType.toUpperCase().startsWith("R"))
+      else if (encryptionType.toUpperCase().startsWith("V"))
       {
-        connection.setEncryptionType(VT.VT_CONNECTION_ENCRYPT_RC4);
+        connection.setEncryptionType(VT.VT_CONNECTION_ENCRYPT_VMPC);
       }
-      // else if (encryptionType.toUpperCase().startsWith("B"))
-      // {
-      // connection.setEncryptionType(VT.VT_CONNECTION_ENCRYPT_BLOWFISH);
-      // }
       else if (encryptionType.toUpperCase().startsWith("S"))
       {
         connection.setEncryptionType(VT.VT_CONNECTION_ENCRYPT_SALSA);
@@ -485,10 +481,6 @@ public class VTServerConnector implements Runnable
       {
         connection.setEncryptionType(VT.VT_CONNECTION_ENCRYPT_ISAAC);
       }
-//      else if (encryptionType.toUpperCase().startsWith("G"))
-//      {
-//        connection.setEncryptionType(VT.VT_CONNECTION_ENCRYPT_GRAIN);
-//      }
       else
       {
         connection.setEncryptionType(VT.VT_CONNECTION_ENCRYPT_NONE);
@@ -535,7 +527,6 @@ public class VTServerConnector implements Runnable
       // connection.getShellSocket().setPerformancePreferences(1, 3, 2);
       //connection.getConnectionSocket().setReceiveBufferSize(VT.VT_CONNECTION_PACKET_BUFFER_SIZE_BYTES);
       //connection.getConnectionSocket().setSendBufferSize(VT.VT_CONNECTION_PACKET_BUFFER_SIZE_BYTES);
-      //connection.getConnectionSocket().connect(socketAddress);
       VTProxy.connect(address, port, connection.getConnectionSocket());
       connection.getConnectionSocket().setTcpNoDelay(true);
       //connection.getConnectionSocket().setSendBufferSize(1024 * 64);
@@ -553,14 +544,10 @@ public class VTServerConnector implements Runnable
       {
         connection.setEncryptionType(VT.VT_CONNECTION_ENCRYPT_ZUC256);
       }
-      else if (encryptionType.toUpperCase().startsWith("R"))
+      else if (encryptionType.toUpperCase().startsWith("V"))
       {
-        connection.setEncryptionType(VT.VT_CONNECTION_ENCRYPT_RC4);
+        connection.setEncryptionType(VT.VT_CONNECTION_ENCRYPT_VMPC);
       }
-      // else if (encryptionType.toUpperCase().startsWith("B"))
-      // {
-      // connection.setEncryptionType(VT.VT_CONNECTION_ENCRYPT_BLOWFISH);
-      // }
       else if (encryptionType.toUpperCase().startsWith("S"))
       {
         connection.setEncryptionType(VT.VT_CONNECTION_ENCRYPT_SALSA);
@@ -573,10 +560,6 @@ public class VTServerConnector implements Runnable
       {
         connection.setEncryptionType(VT.VT_CONNECTION_ENCRYPT_ISAAC);
       }
-//      else if (encryptionType.toUpperCase().startsWith("G"))
-//      {
-//        connection.setEncryptionType(VT.VT_CONNECTION_ENCRYPT_GRAIN);
-//      }
       else
       {
         connection.setEncryptionType(VT.VT_CONNECTION_ENCRYPT_NONE);

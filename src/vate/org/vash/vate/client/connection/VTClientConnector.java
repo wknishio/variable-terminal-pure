@@ -583,9 +583,8 @@ public class VTClientConnector implements Runnable
       connectionServerSocket.setSoTimeout(0);
 //      connecting = true;
       connection.setConnectionSocket(connectionServerSocket.accept());
-      //connection.getConnectionSocket().setSendBufferSize(VT.VT_CONNECTION_PACKET_BUFFER_SIZE_BYTES);
       connection.getConnectionSocket().setTcpNoDelay(true);
-      //connection.getConnectionSocket().setSendBufferSize(1024 * 64);
+      //connection.getConnectionSocket().setSendBufferSize(VT.VT_CONNECTION_PACKET_BUFFER_SIZE_BYTES);
       //connection.getConnectionSocket().setReceiveBufferSize(1024 * 64);
       //connection.getConnectionSocket().setSoLinger(true, 5);
       // connection.getConnectionSocket().setReuseAddress(true);
@@ -600,14 +599,10 @@ public class VTClientConnector implements Runnable
       {
         connection.setEncryptionType(VT.VT_CONNECTION_ENCRYPT_ZUC256);
       }
-      else if (encryptionType.toUpperCase().startsWith("R"))
+      else if (encryptionType.toUpperCase().startsWith("V"))
       {
-        connection.setEncryptionType(VT.VT_CONNECTION_ENCRYPT_RC4);
+        connection.setEncryptionType(VT.VT_CONNECTION_ENCRYPT_VMPC);
       }
-      // else if (encryptionType.toUpperCase().startsWith("B"))
-      // {
-      // connection.setEncryptionType(VT.VT_CONNECTION_ENCRYPT_BLOWFISH);
-      // }
       else if (encryptionType.toUpperCase().startsWith("S"))
       {
         connection.setEncryptionType(VT.VT_CONNECTION_ENCRYPT_SALSA);
@@ -620,10 +615,6 @@ public class VTClientConnector implements Runnable
       {
         connection.setEncryptionType(VT.VT_CONNECTION_ENCRYPT_ISAAC);
       }
-//      else if (encryptionType.toUpperCase().startsWith("G"))
-//      {
-//        connection.setEncryptionType(VT.VT_CONNECTION_ENCRYPT_GRAIN);
-//      }
       else
       {
         connection.setEncryptionType(VT.VT_CONNECTION_ENCRYPT_NONE);
@@ -700,14 +691,10 @@ public class VTClientConnector implements Runnable
       {
         connection.setEncryptionType(VT.VT_CONNECTION_ENCRYPT_ZUC256);
       }
-      else if (encryptionType.toUpperCase().startsWith("R"))
+      else if (encryptionType.toUpperCase().startsWith("V"))
       {
-        connection.setEncryptionType(VT.VT_CONNECTION_ENCRYPT_RC4);
+        connection.setEncryptionType(VT.VT_CONNECTION_ENCRYPT_VMPC);
       }
-      // else if (encryptionType.toUpperCase().startsWith("B"))
-      // {
-      // connection.setEncryptionType(VT.VT_CONNECTION_ENCRYPT_BLOWFISH);
-      // }
       else if (encryptionType.toUpperCase().startsWith("S"))
       {
         connection.setEncryptionType(VT.VT_CONNECTION_ENCRYPT_SALSA);
@@ -720,10 +707,6 @@ public class VTClientConnector implements Runnable
       {
         connection.setEncryptionType(VT.VT_CONNECTION_ENCRYPT_ISAAC);
       }
-//      else if (encryptionType.toUpperCase().startsWith("G"))
-//      {
-//        connection.setEncryptionType(VT.VT_CONNECTION_ENCRYPT_GRAIN);
-//      }
       else
       {
         connection.setEncryptionType(VT.VT_CONNECTION_ENCRYPT_NONE);
@@ -1047,7 +1030,7 @@ public class VTClientConnector implements Runnable
           }
           if (line.toUpperCase().startsWith("Y"))
           {
-            VTConsole.print("VT>Enter encryption type(RC4(R)/ISAAC(I)/SALSA(S)/HC256(H)/ZUC256(Z)):");
+            VTConsole.print("VT>Enter encryption type(ISAAC(I)/VMPC(V)/SALSA(S)/HC256(H)/ZUC256(Z)):");
             line = VTConsole.readLine(false);
             if (line == null)
             {
@@ -1057,15 +1040,11 @@ public class VTClientConnector implements Runnable
             {
               return true;
             }
-            encryptionType = "RC4";
+            encryptionType = "ISAAC";
             if (line.toUpperCase().startsWith("Z"))
             {
               encryptionType = "ZUC256";
             }
-            // if (line.toUpperCase().startsWith("B"))
-            // {
-            // encryptionType = "BLOWFISH";
-            // }
             if (line.toUpperCase().startsWith("S"))
             {
               encryptionType = "SALSA";
@@ -1074,13 +1053,9 @@ public class VTClientConnector implements Runnable
             {
               encryptionType = "HC256";
             }
-//            if (line.toUpperCase().startsWith("G"))
-//            {
-//              encryptionType = "GRAIN";
-//            }
-            if (line.toUpperCase().startsWith("I"))
+            if (line.toUpperCase().startsWith("V"))
             {
-              encryptionType = "ISAAC";
+              encryptionType = "VMPC";
             }
             VTConsole.print("VT>Enter encryption password:");
             line = VTConsole.readLine(false);
@@ -1151,7 +1126,7 @@ public class VTClientConnector implements Runnable
         }
         if (line.toUpperCase().startsWith("Y"))
         {
-          VTConsole.print("VT>Enter encryption type(RC4(R)/ISAAC(I)/SALSA(S)/HC256(H)/ZUC256(Z)):");
+          VTConsole.print("VT>Enter encryption type(ISAAC(I)/VMPC(V)/SALSA(S)/HC256(H)/ZUC256(Z)):");
           line = VTConsole.readLine(false);
           if (line == null)
           {
@@ -1161,15 +1136,11 @@ public class VTClientConnector implements Runnable
           {
             return true;
           }
-          encryptionType = "RC4";
+          encryptionType = "ISAAC";
           if (line.toUpperCase().startsWith("Z"))
           {
             encryptionType = "ZUC256";
           }
-          // if (line.toUpperCase().startsWith("B"))
-          // {
-          // encryptionType = "BLOWFISH";
-          // }
           if (line.toUpperCase().startsWith("S"))
           {
             encryptionType = "SALSA";
@@ -1178,13 +1149,9 @@ public class VTClientConnector implements Runnable
           {
             encryptionType = "HC256";
           }
-//          if (line.toUpperCase().startsWith("G"))
-//          {
-//            encryptionType = "GRAIN";
-//          }
-          if (line.toUpperCase().startsWith("I"))
+          if (line.toUpperCase().startsWith("V"))
           {
-            encryptionType = "ISAAC";
+            encryptionType = "VMPC";
           }
           VTConsole.print("VT>Enter encryption password:");
           line = VTConsole.readLine(false);

@@ -31,7 +31,7 @@ public class VTBEEP extends VTServerStandardRemoteConsoleCommandProcessor
     }
     else if (parsed.length >= 3)
     {
-      SourceDataLine sdl = VTAudioBeeper.openSourceDataLine(SAMPLE_RATE_HERTZ, SAMPLE_SIZE_BITS);
+      SourceDataLine sdl = null;
       if (parsed.length >= 4)
       {
         try
