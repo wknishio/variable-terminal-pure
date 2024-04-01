@@ -135,25 +135,26 @@ public class VTNativeUtils
         else
         {
           // try to use cscript windows script host vbs file
-          File tmpdtvbsFile = null;
+          File tmpedtvbsFile = null;
+          int status = -1;
           try
           {
-            tmpdtvbsFile = File.createTempFile("vate_win32_tmp_eject_disc_tray_vbs", ".vbs");
-            FileOutputStream output = new FileOutputStream(tmpdtvbsFile);
+            tmpedtvbsFile = File.createTempFile("vate_w32_tedt", ".vbs");
+            FileOutputStream output = new FileOutputStream(tmpedtvbsFile);
             output.write(WIN32_EJECT_DISC_TRAY_VBS.getBytes());
             output.flush();
             output.close();
-            int status = Runtime.getRuntime().exec("cscript " + tmpdtvbsFile.getAbsolutePath()).waitFor();
-            return status == 0;
+            status = Runtime.getRuntime().exec("cscript " + tmpedtvbsFile.getAbsolutePath()).waitFor();
           }
           catch (Throwable e)
           {
             
           }
-          if (tmpdtvbsFile != null)
+          if (tmpedtvbsFile != null)
           {
-            tmpdtvbsFile.delete();
+            tmpedtvbsFile.delete();
           }
+          return status == 0;
         }
       }
       else
@@ -179,25 +180,26 @@ public class VTNativeUtils
       else
       {
         // try to use cscript windows script host vbs file
-        File tmpdtvbsFile = null;
+        File tmpedtvbsFile = null;
+        int status = -1;
         try
         {
-          tmpdtvbsFile = File.createTempFile("vate_win32_tmp_eject_disc_tray_vbs", ".vbs");
-          FileOutputStream output = new FileOutputStream(tmpdtvbsFile);
+          tmpedtvbsFile = File.createTempFile("vate_w32_tedt", ".vbs");
+          FileOutputStream output = new FileOutputStream(tmpedtvbsFile);
           output.write(WIN32_EJECT_DISC_TRAY_VBS.getBytes());
           output.flush();
           output.close();
-          int status = Runtime.getRuntime().exec("cscript " + tmpdtvbsFile.getAbsolutePath()).waitFor();
-          return status == 0;
+          status = Runtime.getRuntime().exec("cscript " + tmpedtvbsFile.getAbsolutePath()).waitFor();
         }
         catch (Throwable e)
         {
           
         }
-        if (tmpdtvbsFile != null)
+        if (tmpedtvbsFile != null)
         {
-          tmpdtvbsFile.delete();
+          tmpedtvbsFile.delete();
         }
+        return status == 0;
       }
     }
     return false;
@@ -227,25 +229,26 @@ public class VTNativeUtils
         else
         {
           // try to use cscript windows script host vbs file
-          File tmpdtvbsFile = null;
+          File tmpedtvbsFile = null;
+          int status = -1;
           try
           {
-            tmpdtvbsFile = File.createTempFile("vate_win32_tmp_eject_disc_tray_vbs", ".vbs");
-            FileOutputStream output = new FileOutputStream(tmpdtvbsFile);
+            tmpedtvbsFile = File.createTempFile("vate_w32_tedt", ".vbs");
+            FileOutputStream output = new FileOutputStream(tmpedtvbsFile);
             output.write(WIN32_EJECT_DISC_TRAY_VBS.getBytes());
             output.flush();
             output.close();
-            int status = Runtime.getRuntime().exec("cscript " + tmpdtvbsFile.getAbsolutePath()).waitFor();
-            return status == 0;
+            status = Runtime.getRuntime().exec("cscript " + tmpedtvbsFile.getAbsolutePath()).waitFor();
           }
           catch (Throwable e)
           {
             
           }
-          if (tmpdtvbsFile != null)
+          if (tmpedtvbsFile != null)
           {
-            tmpdtvbsFile.delete();
+            tmpedtvbsFile.delete();
           }
+          return status == 0;
         }
       }
       else
@@ -271,25 +274,26 @@ public class VTNativeUtils
       else
       {
         // try to use cscript windows script host vbs file
-        File tmpdtvbsFile = null;
+        File tmpedtvbsFile = null;
+        int status = -1;
         try
         {
-          tmpdtvbsFile = File.createTempFile("vate_win32_tmp_eject_disc_tray_vbs", ".vbs");
-          FileOutputStream output = new FileOutputStream(tmpdtvbsFile);
+          tmpedtvbsFile = File.createTempFile("vate_w32_tedt", ".vbs");
+          FileOutputStream output = new FileOutputStream(tmpedtvbsFile);
           output.write(WIN32_EJECT_DISC_TRAY_VBS.getBytes());
           output.flush();
           output.close();
-          int status = Runtime.getRuntime().exec("cscript " + tmpdtvbsFile.getAbsolutePath()).waitFor();
-          return status == 0;
+          status = Runtime.getRuntime().exec("cscript " + tmpedtvbsFile.getAbsolutePath()).waitFor();
         }
         catch (Throwable e)
         {
           
         }
-        if (tmpdtvbsFile != null)
+        if (tmpedtvbsFile != null)
         {
-          tmpdtvbsFile.delete();
+          tmpedtvbsFile.delete();
         }
+        return status == 0;
       }
     }
     return false;
