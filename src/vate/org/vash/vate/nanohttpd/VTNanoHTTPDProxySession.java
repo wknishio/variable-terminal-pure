@@ -26,7 +26,9 @@ import java.util.TimeZone;
 import java.util.Map.Entry;
 
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.codec.digest.Blake3;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.bouncycastle.util.encoders.Hex;
 import org.vash.vate.VT;
 import org.vash.vate.parser.VTConfigurationProperties;
 import org.vash.vate.socket.VTAuthenticatedProxySocket;
@@ -574,7 +576,7 @@ public class VTNanoHTTPDProxySession implements Runnable
     Response resp = new Response();
     resp.headers.put("Proxy-Authenticate", "Digest realm=\"" + realm + "\", "
         +  "qop=\"auth\", nonce=\"" + nonce + "\", " + "opaque=\""
-        + DigestUtils.md5Hex(nonce.getBytes("ISO-8859-1")) + "\"" + (stale ? ", stale=\"true\"" : ""));
+        + Hex.toHexString(Blake3.hash(nonce.getBytes("ISO-8859-1"))) + "\"" + (stale ? ", stale=\"true\"" : ""));
     resp.status = HTTP_PROXY_AUTHENTICATION_REQUIRED;
     sendError(resp.status, MIME_PLAINTEXT, resp.headers, null);
   }
@@ -718,8 +720,8 @@ public class VTNanoHTTPDProxySession implements Runnable
     secondThread.setName(secondPipe.getClass().getSimpleName());
     secondThread.setDaemon(true);
     
-    firstPipe.setAnother(secondThread);
-    secondPipe.setAnother(firstThread);
+//    firstPipe.setAnother(secondThread);
+//    secondPipe.setAnother(firstThread);
     
     firstThread.start();
     secondThread.start();
@@ -754,8 +756,9 @@ public class VTNanoHTTPDProxySession implements Runnable
   {
     long currentTime = System.currentTimeMillis();
     
-    String nonceValue = username + ":" + password + ":" + currentTime + ":" + realm;
-    nonceValue = DigestUtils.md5Hex(nonceValue.getBytes("ISO-8859-1"));
+    String nonceValue = realm + ":" + username + ":" + password + ":" + currentTime;
+    nonceValue = Hex.toHexString(Blake3.hash(nonceValue.getBytes("ISO-8859-1")));
+    //nonceValue = DigestUtils.sha256Hex(nonceValue.getBytes("ISO-8859-1"));
     
     //VALID_DIGEST_NONCES.put(nOnceValue, currentTime + (1000 * 300));
     return nonceValue;
@@ -795,7 +798,7 @@ public class VTNanoHTTPDProxySession implements Runnable
   {
     private Socket close1;
     private Socket close2;
-    private Thread another;
+    //private Thread another;
     //private Socket second;
     private InputStream source;
     private OutputStream destination;
@@ -812,10 +815,10 @@ public class VTNanoHTTPDProxySession implements Runnable
       this.destination = destination;
     }
     
-    public void setAnother(Thread another)
-    {
-      this.another = another;
-    }
+//    public void setAnother(Thread another)
+//    {
+//      this.another = another;
+//    }
     
     public void run()
     {
@@ -856,14 +859,14 @@ public class VTNanoHTTPDProxySession implements Runnable
           
         }
         
-        try
-        {
-          another.interrupt();
-        }
-        catch (Throwable t)
-        {
-          
-        }
+//        try
+//        {
+//          another.interrupt();
+//        }
+//        catch (Throwable t)
+//        {
+//          
+//        }
       }
     }
   }
