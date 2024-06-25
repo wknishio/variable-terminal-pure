@@ -49,7 +49,7 @@ public class VTServerConnector implements Runnable
     this.server = server;
     this.secureRandom = secureRandom;
     this.connectionHandlers = Collections.synchronizedList(new ArrayList<VTServerConnectionHandler>());
-    portMappingManager = new VTNATSinglePortMappingManagerMKII(3, 300);
+    portMappingManager = new VTNATSinglePortMappingManagerMKII(3, 300, server.getExecutorService());
     portMappingManager.start();
   }
   
@@ -579,6 +579,10 @@ public class VTServerConnector implements Runnable
   {
     /* if (passive) { if (!setServerSocket(socketAddress)) { return; } } */
     Thread.currentThread().setName(this.getClass().getSimpleName());
+//    if (server.getInputMenuBar() != null)
+//    {
+//      server.getInputMenuBar().setEnabled(true);
+//    }
     server.enableInputMenuBar();
     while (running)
     {
@@ -620,7 +624,7 @@ public class VTServerConnector implements Runnable
               // Thread handlerThread = new Thread(handler,
               // handler.getClass().getSimpleName());
               // handlerThread.start();
-              server.getServerThreads().execute(handler);
+              server.getExecutorService().execute(handler);
             }
           }
           else
@@ -640,7 +644,7 @@ public class VTServerConnector implements Runnable
               // Thread handlerThread = new Thread(handler,
               // handler.getClass().getSimpleName());
               // handlerThread.start();
-              server.getServerThreads().execute(handler);
+              server.getExecutorService().execute(handler);
             }
           }
           else
