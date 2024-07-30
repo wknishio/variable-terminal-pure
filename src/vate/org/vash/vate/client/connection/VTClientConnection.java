@@ -47,6 +47,7 @@ public class VTClientConnection
   
   private int encryptionType;
   private byte[] encryptionKey;
+  private byte[] digestedCredentials;
   // private byte[] digestedClient;
   // private byte[] digestedServer;
   private final byte[] localNonce = new byte[VT.VT_SECURITY_DIGEST_SIZE_BYTES];
@@ -176,6 +177,11 @@ public class VTClientConnection
   public byte[] getRemoteNonce()
   {
     return remoteNonce;
+  }
+  
+  public byte[] getDigestedCredentials()
+  {
+    return digestedCredentials;
   }
   
   public void setEncryptionType(int encryptionType)
@@ -605,6 +611,7 @@ public class VTClientConnection
     {
       return false;
     }
+    this.digestedCredentials = digestedCredentials;
     //cryptoEngine.initializeClientEngine(encryptionType, encryptionKey, localNonce, remoteNonce, digestedCredentials, user != null ? user.getBytes("UTF-8") : null, password != null ? password.getBytes("UTF-8") : null);
     cryptoEngine.initializeClientEngine(encryptionType, localNonce, remoteNonce, encryptionKey, digestedCredentials);
     //connectionInputStream = cryptoEngine.getDecryptedInputStream(connectionSocketInputStream);
