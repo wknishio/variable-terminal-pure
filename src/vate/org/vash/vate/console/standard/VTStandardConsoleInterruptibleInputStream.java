@@ -28,6 +28,11 @@ public class VTStandardConsoleInterruptibleInputStream extends InputStream
     reader.setEcho(echo);
   }
   
+  public boolean getEcho()
+  {
+    return reader.getEcho();
+  }
+  
   public boolean usingRead()
   {
     return currentThread == null;
@@ -112,5 +117,10 @@ public class VTStandardConsoleInterruptibleInputStream extends InputStream
   public void close() throws IOException
   {
     // unclosable!
+  }
+  
+  public void input(String data)
+  {
+    reader.input(data);
   }
 }
