@@ -18,4 +18,9 @@ public abstract class VTServerStandardLocalConsoleCommandProcessor extends VTSer
   {
     return false;
   }
+  
+  public void waitFor()
+  {
+    
+  }
 }
