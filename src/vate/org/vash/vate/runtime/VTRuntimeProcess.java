@@ -2,6 +2,7 @@ package org.vash.vate.runtime;
 
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.reflect.Field;
 import java.util.concurrent.ExecutorService;
 import org.vash.vate.reflection.VTReflectionUtils;
 
@@ -158,12 +159,12 @@ public class VTRuntimeProcess
     return this.restart;
   }
   
-  public boolean isRead()
+  public boolean hasOutputRedirect()
   {
     return outputRedirect != null;
   }
   
-  public boolean isWrite()
+  public boolean hasInputRedirect()
   {
     return inputRedirect != null;
   }
