@@ -452,7 +452,7 @@ public class VTServerConnector implements Runnable
       connection.getConnectionSocket().setTcpNoDelay(true);
       //connection.getConnectionSocket().setSoLinger(true, 0);
       //connection.getConnectionSocket().setKeepAlive(true);
-      connection.getConnectionSocket().setSoTimeout(VT.VT_CONNECTION_DATA_TIMEOUT_MILLISECONDS);
+      connection.getConnectionSocket().setSoTimeout(server.getDataTimeout());
 //      connecting = false;
       if (encryptionType == null)
       {
@@ -516,7 +516,7 @@ public class VTServerConnector implements Runnable
       connection.getConnectionSocket().setTcpNoDelay(true);
       //connection.getConnectionSocket().setSoLinger(true, 0);
       //connection.getConnectionSocket().setKeepAlive(true);
-      connection.getConnectionSocket().setSoTimeout(VT.VT_CONNECTION_DATA_TIMEOUT_MILLISECONDS);
+      connection.getConnectionSocket().setSoTimeout(server.getDataTimeout());
 //      connecting = false;
       if (encryptionType == null)
       {
