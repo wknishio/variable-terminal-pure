@@ -4,9 +4,9 @@ import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 import org.vash.vate.VT;
 import org.vash.vate.console.VTConsole;
@@ -38,17 +38,17 @@ public class VTServerConnector implements Runnable
   private String sessionShell = "";
   private ServerSocket connectionServerSocket;
   private VTServer server;
-  private List<VTServerConnectionHandler> connectionHandlers;
+  private Collection<VTServerConnectionHandler> connectionHandlers;
   private VTNATSinglePortMappingManagerMKII portMappingManager;
   private VTServerConnectorNATPortMappingResultNotify natNotify = new VTServerConnectorNATPortMappingResultNotify();
-  private List<VTServerSessionListener> listeners = new ArrayList<VTServerSessionListener>();
+  private Collection<VTServerSessionListener> listeners = new ConcurrentLinkedQueue<VTServerSessionListener>();
   private final VTBlake3SecureRandom secureRandom;
   
   public VTServerConnector(VTServer server, VTBlake3SecureRandom secureRandom)
   {
     this.server = server;
     this.secureRandom = secureRandom;
-    this.connectionHandlers = Collections.synchronizedList(new ArrayList<VTServerConnectionHandler>());
+    this.connectionHandlers = new ConcurrentLinkedQueue<VTServerConnectionHandler>();
     portMappingManager = new VTNATSinglePortMappingManagerMKII(3, 300, server.getExecutorService());
     portMappingManager.start();
   }
@@ -80,7 +80,7 @@ public class VTServerConnector implements Runnable
     interruptConnector();
     try
     {
-      for (VTServerConnectionHandler handler : connectionHandlers.toArray(new VTServerConnectionHandler[] {}))
+      for (VTServerConnectionHandler handler : connectionHandlers)
       {
         try
         {
@@ -250,7 +250,7 @@ public class VTServerConnector implements Runnable
     this.sessionsMaximum = sessionsMaximum;
   }
   
-  public List<VTServerConnectionHandler> getConnectionHandlers()
+  public Collection<VTServerConnectionHandler> getConnectionHandlers()
   {
     return connectionHandlers;
   }
@@ -448,7 +448,6 @@ public class VTServerConnector implements Runnable
       connectionServerSocket.setSoTimeout(0);
 //      connecting = true;
       connection.setConnectionSocket(connectionServerSocket.accept());
-      //connection.getConnectionSocket().setSendBufferSize(VT.VT_CONNECTION_PACKET_BUFFER_SIZE_BYTES);
       connection.getConnectionSocket().setTcpNoDelay(true);
       //connection.getConnectionSocket().setSoLinger(true, 0);
       //connection.getConnectionSocket().setKeepAlive(true);
