@@ -40,7 +40,7 @@ public class VTRuntimeProcess
   {
     try
     {
-      processDestroyForciblyMethod = Class.forName("java.lang.Process").getDeclaredMethod("destroyForcibly", (Class[])null);
+      processDestroyForciblyMethod = Class.forName("java.lang.Process").getDeclaredMethod("destroyForcibly");
       processWaitForMethod = Class.forName("java.lang.Process").getDeclaredMethod("waitFor", new Class[] {Long.class, TimeUnit.class});
     }
     catch (Throwable t)
@@ -316,14 +316,33 @@ public class VTRuntimeProcess
   private static long getProcessID(Process p)
   {
     long result = -1;
-    try
-    {
-      
-    }
-    catch (Throwable ex)
-    {
-      result = -1;
-    }
+//    try
+//    {
+//      // for windows
+//      if (p.getClass().getName().equals("java.lang.Win32Process") || p.getClass().getName().equals("java.lang.ProcessImpl"))
+//      {
+//        Field f = p.getClass().getDeclaredField("handle");
+//        f.setAccessible(true);
+//        long handl = f.getLong(p);
+//        Kernel32 kernel = Kernel32.INSTANCE;
+//        WinNT.HANDLE hand = new WinNT.HANDLE();
+//        hand.setPointer(Pointer.createConstant(handl));
+//        result = kernel.GetProcessId(hand);
+//        // f.setAccessible(false);
+//      }
+//      // for unix based operating systems
+//      else if (p.getClass().getName().equals("java.lang.UNIXProcess"))
+//      {
+//        Field f = p.getClass().getDeclaredField("pid");
+//        f.setAccessible(true);
+//        result = f.getLong(p);
+//        // f.setAccessible(false);
+//      }
+//    }
+//    catch (Throwable ex)
+//    {
+//      result = -1;
+//    }
     return result;
   }
   
