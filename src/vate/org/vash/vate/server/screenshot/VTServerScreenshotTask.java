@@ -75,9 +75,9 @@ public class VTServerScreenshotTask extends VTTask
     this.useJPG = false;
     try
     {
-      pngEncoder = new PngEncoder().withCompressionLevel(1);
-      //pngEncoder = new PngEncoder(PngEncoder.COLOR_INDEXED, PngEncoder.BEST_SPEED);
-      //pngEncoder.setIndexedColorMode(PngEncoder.INDEXED_COLORS_ORIGINAL);
+      this.pngEncoder = new PngEncoder().withCompressionLevel(1);
+      //this.pngEncoder = new PngEncoder(PngEncoder.COLOR_TRUECOLOR, PngEncoder.BEST_SPEED);
+      //this.pngEncoder.setIndexedColorMode(PngEncoder.INDEXED_COLORS_ORIGINAL);
       
       this.jpgWriter = ImageIO.getImageWritersByFormatName("jpeg").next();
       this.jpgWriterParam = jpgWriter.getDefaultWriteParam();

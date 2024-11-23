@@ -199,5 +199,4 @@ public class VTStandardConsoleInterruptibleReader implements Runnable
     }
     requested = false;
   }
-  
 }

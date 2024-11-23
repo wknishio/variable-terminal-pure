@@ -17,5 +17,5 @@ public abstract class VTServerStandardLocalConsoleCommandProcessor extends VTSer
   public boolean remote()
   {
     return false;
-  }  
+  }
 }
