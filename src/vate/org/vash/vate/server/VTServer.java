@@ -76,7 +76,7 @@ public class VTServer implements Runnable
   private int pingLimit = 0;
   private int pingInterval = 0;
   private int reconnectTimeout = 0;
-  private Future<?> startThread;
+  private Future<?> runThread;
   
   private static final String VT_SERVER_SETTINGS_COMMENTS = 
   "Variable-Terminal server settings file, supports UTF-8\r\n" + 
@@ -2258,16 +2258,35 @@ public class VTServer implements Runnable
   
   public void start()
   {
-    startThread = executorService.submit(new Runnable()
+    runThread = executorService.submit(new Runnable()
     {
       public void run()
       {
-        startServer();
+        runServer();
+      }
+    });
+    try
+    {
+      runThread.get();
+    }
+    catch (Throwable t)
+    {
+      
+    }
+  }
+  
+  public void startThread()
+  {
+    runThread = executorService.submit(new Runnable()
+    {
+      public void run()
+      {
+        runServer();
       }
     });
   }
   
-  private void startServer()
+  private void runServer()
   {
     Thread.setDefaultUncaughtExceptionHandler(new VTUncaughtExceptionHandler());
     // loadFileServerSettings();
@@ -2508,9 +2527,9 @@ public class VTServer implements Runnable
   
   public boolean isRunning()
   {
-    if (startThread != null)
+    if (runThread != null)
     {
-      return !startThread.isDone();
+      return !runThread.isDone();
     }
     return false;
   }
