@@ -3,6 +3,7 @@ package org.vash.vate.server;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
 import java.util.Properties;
@@ -493,7 +494,7 @@ public class VTServer implements Runnable
     }
   }
   
-  public void saveServerSettingsFile(String settingsFile) throws Exception
+  public void saveServerSettingsFile(String settingsFile) throws IOException
   {
     loadFromConnectorToServer();
     if (vtURL != null)
@@ -538,7 +539,7 @@ public class VTServer implements Runnable
     out.close();
   }
   
-  public void loadServerSettingsFile(String settingsFile) throws Exception
+  public void loadServerSettingsFile(String settingsFile) throws IOException
   {
     loadFromConnectorToServer();
     if (vtURL != null)
@@ -1070,7 +1071,7 @@ public class VTServer implements Runnable
     }
   }
   
-  public void loadServerSettingsProperties(Properties properties) throws Exception
+  public void loadServerSettingsProperties(Properties properties)
   {
     loadFromConnectorToServer();
     
