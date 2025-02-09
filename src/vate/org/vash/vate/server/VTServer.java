@@ -19,6 +19,8 @@ import org.vash.vate.audio.VTAudioSystem;
 import org.vash.vate.console.VTConsole;
 import org.vash.vate.exception.VTUncaughtExceptionHandler;
 import org.vash.vate.graphics.message.VTTrayIconInterface;
+import org.vash.vate.monitoring.VTDataMonitorMenu;
+import org.vash.vate.monitoring.VTDataMonitorService;
 import org.vash.vate.parser.VTArgumentParser;
 import org.vash.vate.parser.VTConfigurationProperties;
 import org.vash.vate.parser.VTPropertiesBuilder;
@@ -77,6 +79,7 @@ public class VTServer implements Runnable
   private int pingInterval = 0;
   private int reconnectTimeout = 0;
   private Future<?> runThread;
+  private VTDataMonitorService monitorService;
   
   private static final String VT_SERVER_SETTINGS_COMMENTS = 
   "Variable-Terminal server settings file, supports UTF-8\r\n" + 
@@ -123,6 +126,11 @@ public class VTServer implements Runnable
     this.audioSystem[4] = new VTAudioSystem(executorService);
     
     //loadServerSettingsFile();
+  }
+  
+  public VTDataMonitorService getMonitorService()
+  {
+    return monitorService;
   }
   
   public void stop()
@@ -2330,6 +2338,7 @@ public class VTServer implements Runnable
   {
     Thread.setDefaultUncaughtExceptionHandler(new VTUncaughtExceptionHandler());
     loadServerSettingsFile();
+    monitorService = new VTDataMonitorService(executorService);
     if (!VTConsole.isDaemon() && VTConsole.isGraphical())
     {
       VTConsole.initialize();
@@ -2338,6 +2347,7 @@ public class VTServer implements Runnable
       {
         connectionDialog = new VTServerSettingsDialog(VTConsole.getFrame(), "Variable-Terminal " + VT.VT_VERSION + " - Server - Connection", true, this);
         inputMenuBar = new VTServerLocalGraphicalConsoleMenuBar(VTConsole.getConsoleInstance(), connectionDialog);
+        monitorService.addMonitorPanel(new VTDataMonitorMenu(inputMenuBar.getMonitorMenu()));
         VTConsole.getFrame().setMenuBar(inputMenuBar);
         VTConsole.getFrame().pack();
         try
@@ -2419,6 +2429,10 @@ public class VTServer implements Runnable
   
   public void run()
   {
+    if (monitorService != null)
+    {
+      executorService.execute(monitorService);
+    }
     serverConnector = new VTServerConnector(this, new VTBlake3SecureRandom());
     serverConnector.setPassive(passive);
     serverConnector.setAddress(hostAddress);
