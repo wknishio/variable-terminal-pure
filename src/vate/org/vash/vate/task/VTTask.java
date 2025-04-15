@@ -36,7 +36,6 @@ public abstract class VTTask implements Runnable, Closeable
     }
   }
   
-  @SuppressWarnings("deprecation")
   public void stopThread()
   {
     if (taskThread != null)
@@ -90,7 +89,7 @@ public abstract class VTTask implements Runnable, Closeable
   {
     stopped = true;
     setStopped(true);
-    if (taskThread != null)
+    if (taskThread != null && !taskThread.isDone())
     {
       try
       {
