@@ -373,7 +373,7 @@ public class VTRuntimeProcess
     }
     try
     {
-      Object forced = processDestroyForciblyMethod.invoke(process, (Object[])null);
+      Object forced = processDestroyForciblyMethod.invoke(process);
       if (forced != null && forced instanceof Process)
       {
         Process destroyed = (Process) forced;
@@ -427,10 +427,12 @@ public class VTRuntimeProcess
       }
       if (!killed)
       {
+        Thread.yield();
         killed = destroyForcibly(process);
       }
       if (!killed)
       {
+        Thread.yield();
         killed = forceKillProcessID(pid);
       }
     }
