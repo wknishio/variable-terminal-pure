@@ -416,8 +416,8 @@ public class VTServerSettingsDialog extends Dialog
     //encryptionTypeChoice.add("VMPC");
     encryptionTypeChoice.add("SALSA");
     encryptionTypeChoice.add("HC");
-    encryptionTypeChoice.add("ZUC");
     encryptionTypeChoice.add("GRAIN");
+    encryptionTypeChoice.add("ZUC");
     encryptionTypeChoice.add("ISAAC");
     // encryptionTypeChoice.add("BLOWFISH");
     encryptionTypeChoice.select("NONE");
@@ -1659,7 +1659,6 @@ public class VTServerSettingsDialog extends Dialog
     update();
     close();
     // VTConsole.println("");
-    
     if (application instanceof VTServer)
     {
       VTServer server = (VTServer) application;

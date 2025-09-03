@@ -425,8 +425,8 @@ public class VTClientConfigurationDialog extends Dialog
     //encryptionTypeChoice.add("VMPC");
     encryptionTypeChoice.add("SALSA");
     encryptionTypeChoice.add("HC");
-    encryptionTypeChoice.add("ZUC");
     encryptionTypeChoice.add("GRAIN");
+    encryptionTypeChoice.add("ZUC");
     encryptionTypeChoice.add("ISAAC");
     // encryptionTypeChoice.add("BLOWFISH");
     encryptionTypeChoice.select("NONE");
@@ -440,14 +440,18 @@ public class VTClientConfigurationDialog extends Dialog
           {
             setEncryptionType("NONE");
           }
-          else if (e.getItem().equals("GRAIN"))
-          {
-            setEncryptionType("GRAIN");
-          }
+//          else if (e.getItem().equals("VMPC"))
+//          {
+//            setEncryptionType("VMPC");
+//          }
           else if (e.getItem().equals("ZUC"))
           {
             setEncryptionType("ZUC");
           }
+          // else if (e.getItem().equals("BLOWFISH"))
+          // {
+          // setEncryptionType("BLOWFISH");
+          // }
           else if (e.getItem().equals("SALSA"))
           {
             setEncryptionType("SALSA");
@@ -455,6 +459,10 @@ public class VTClientConfigurationDialog extends Dialog
           else if (e.getItem().equals("HC"))
           {
             setEncryptionType("HC");
+          }
+          else if (e.getItem().equals("GRAIN"))
+          {
+            setEncryptionType("GRAIN");
           }
           else if (e.getItem().equals("ISAAC"))
           {
