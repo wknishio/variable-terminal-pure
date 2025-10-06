@@ -63,10 +63,10 @@ public class VTRuntimeProcess
     this.timeout = timeout;
   }
   
-  public void finalize()
-  {
-    //destroy();
-  }
+//  public void finalize()
+//  {
+//    destroy();
+//  }
   
   public ProcessBuilder getBuilder()
   {
