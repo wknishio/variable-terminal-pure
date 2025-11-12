@@ -827,6 +827,15 @@ public final class VTMainConsole
     return null;
   }
   
+  public static int getLastOutputLineLength()
+  {
+    if (checkConsole())
+    {
+      return console.getLastOutputLineLength();
+    }
+    return -1;
+  }
+  
   public static boolean isFlushModePause()
   {
     if (checkConsole())
