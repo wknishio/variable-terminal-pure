@@ -1,2 +1,1 @@
-#/bin/sh
-java -cp vate-all-shell.jar org.vash.vate.startup.VTStandardStart $*
+java -cp vate-pure-all-shell.jar org.vash.vate.startup.VTStandardStart $*

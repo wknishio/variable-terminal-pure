@@ -1,2 +1,1 @@
-#/bin/sh
-java -cp vate-client-console.jar org.vash.vate.client.startup.VTClientGraphicalStart $* &
+java -cp vate-pure-client-console.jar org.vash.vate.client.startup.VTClientGraphicalStart $* &

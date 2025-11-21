@@ -1,1 +1,1 @@
-java -cp vate-server-console.jar org.vash.vate.server.startup.VTServerGraphicalStart %*
+java -cp vate-pure-server-console.jar org.vash.vate.server.startup.VTServerGraphicalStart %*

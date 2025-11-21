@@ -1,2 +1,1 @@
-#/bin/sh
-java -cp vate-lib.jar org.vash.vate.runtime.launcher.VTFileRuntimeLauncher $*
+java -cp vate-pure-lib.jar org.vash.vate.runtime.launcher.VTFileRuntimeLauncher $*

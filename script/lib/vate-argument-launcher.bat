@@ -1,1 +1,1 @@
-java -cp vate-lib.jar.jar org.vash.vate.runtime.launcher.VTArgumentsRuntimeLauncher %*
+java -cp vate-pure-lib.jar.jar org.vash.vate.runtime.launcher.VTArgumentsRuntimeLauncher %*

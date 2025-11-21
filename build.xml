@@ -80,7 +80,7 @@
 			<fileset dir="script/lib"/>
 		</copy>
 		
-		<jar destfile="dist/lib-pure/vate-lib.jar" update="false">
+		<jar destfile="dist/lib-pure/vate-pure-lib.jar" update="false">
 			<manifest>
 				<attribute name="Built-By" value="William Kendi Nishio"/>
 				<attribute name="Build-Date" value="${build.time.era} ${build.time.date}"/>
@@ -113,7 +113,7 @@
 			<fileset dir="conf/client"/>
 		</copy>
 		
-		<jar destfile="dist/all-pure/vate-all-console.jar" filesetmanifest="mergewithoutmain" update="false">
+		<jar destfile="dist/all-pure/vate-pure-all-console.jar" filesetmanifest="mergewithoutmain" update="false">
 			<manifest>
 				<attribute name="Built-By" value="William Kendi Nishio"/>
 				<attribute name="Build-Date" value="${build.time.era} ${build.time.date}"/>
@@ -133,7 +133,7 @@
 			<zipgroupfileset dir="lib" excludes="META-INF/*.SF,META-INF/*.DSA,META-INF/*.RSA"/>
 		</jar>
 		
-		<jar destfile="dist/all-pure/vate-all-shell.jar" filesetmanifest="mergewithoutmain" update="false">
+		<jar destfile="dist/all-pure/vate-pure-all-shell.jar" filesetmanifest="mergewithoutmain" update="false">
 			<manifest>
 				<attribute name="Built-By" value="William Kendi Nishio"/>
 				<attribute name="Build-Date" value="${build.time.era} ${build.time.date}"/>
@@ -162,7 +162,7 @@
 			<fileset dir="conf/client"/>
 		</copy>
 		
-		<jar destfile="dist/client-pure/vate-client-console.jar" filesetmanifest="mergewithoutmain" update="false">
+		<jar destfile="dist/client-pure/vate-pure-client-console.jar" filesetmanifest="mergewithoutmain" update="false">
 			<manifest>
 				<attribute name="Built-By" value="William Kendi Nishio"/>
 				<attribute name="Build-Date" value="${build.time.era} ${build.time.date}"/>
@@ -182,7 +182,7 @@
 			<zipgroupfileset dir="lib" excludes="META-INF/*.SF,META-INF/*.DSA,META-INF/*.RSA"/>
 		</jar>
 		
-		<jar destfile="dist/client-pure/vate-client-shell.jar" filesetmanifest="mergewithoutmain" update="false">
+		<jar destfile="dist/client-pure/vate-pure-client-shell.jar" filesetmanifest="mergewithoutmain" update="false">
 			<manifest>
 				<attribute name="Built-By" value="William Kendi Nishio"/>
 				<attribute name="Build-Date" value="${build.time.era} ${build.time.date}"/>
@@ -202,7 +202,7 @@
 			<zipgroupfileset dir="lib" excludes="META-INF/*.SF,META-INF/*.DSA,META-INF/*.RSA"/>
 		</jar>
 		
-		<jar destfile="dist/client-pure/vate-client-agent.jar" filesetmanifest="mergewithoutmain" update="false">
+		<jar destfile="dist/client-pure/vate-pure-client-agent.jar" filesetmanifest="mergewithoutmain" update="false">
 			<manifest>
 				<attribute name="Built-By" value="William Kendi Nishio"/>
 				<attribute name="Build-Date" value="${build.time.era} ${build.time.date}"/>
@@ -231,7 +231,7 @@
 			<fileset dir="conf/server"/>
 		</copy>
 			
-		<jar destfile="dist/server-pure/vate-server-console.jar" filesetmanifest="mergewithoutmain" update="false">
+		<jar destfile="dist/server-pure/vate-pure-server-console.jar" filesetmanifest="mergewithoutmain" update="false">
 			<manifest>
 				<attribute name="Built-By" value="William Kendi Nishio"/>
 				<attribute name="Build-Date" value="${build.time.era} ${build.time.date}"/>
@@ -251,7 +251,7 @@
 			<zipgroupfileset dir="lib" excludes="META-INF/*.SF,META-INF/*.DSA,META-INF/*.RSA"/>
 		</jar>
 		
-		<jar destfile="dist/server-pure/vate-server-shell.jar" filesetmanifest="mergewithoutmain" update="false">
+		<jar destfile="dist/server-pure/vate-pure-server-shell.jar" filesetmanifest="mergewithoutmain" update="false">
 			<manifest>
 				<attribute name="Built-By" value="William Kendi Nishio"/>
 				<attribute name="Build-Date" value="${build.time.era} ${build.time.date}"/>
@@ -271,7 +271,7 @@
 			<zipgroupfileset dir="lib" excludes="META-INF/*.SF,META-INF/*.DSA,META-INF/*.RSA"/>
 		</jar>
 		
-		<jar destfile="dist/server-pure/vate-server-daemon.jar" filesetmanifest="mergewithoutmain" update="false">
+		<jar destfile="dist/server-pure/vate-pure-server-daemon.jar" filesetmanifest="mergewithoutmain" update="false">
 			<manifest>
 				<attribute name="Built-By" value="William Kendi Nishio"/>
 				<attribute name="Build-Date" value="${build.time.era} ${build.time.date}"/>

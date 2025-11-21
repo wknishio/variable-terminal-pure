@@ -1,1 +1,1 @@
-java -cp vate-lib.jar org.vash.vate.runtime.launcher.VTFileRuntimeRelauncher %*
+java -cp vate-pure-lib.jar org.vash.vate.runtime.launcher.VTFileRuntimeRelauncher %*
