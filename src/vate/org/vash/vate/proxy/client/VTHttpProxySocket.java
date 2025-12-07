@@ -5,9 +5,9 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
 
-import org.apache.commons.httpclient.ProxyClient;
-import org.apache.commons.httpclient.UsernamePasswordCredentials;
-import org.apache.commons.httpclient.auth.AuthScope;
+import org.vash.vate.apache.commons.httpclient.ProxyClient;
+import org.vash.vate.apache.commons.httpclient.UsernamePasswordCredentials;
+import org.vash.vate.apache.commons.httpclient.auth.AuthScope;
 
 public class VTHttpProxySocket extends VTProxySocket
 {
