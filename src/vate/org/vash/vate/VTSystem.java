@@ -21,7 +21,6 @@ import org.vash.vate.graphics.font.VTFontManager;
 import org.vash.vate.help.VTHelpManager;
 import org.vash.vate.io.airlift.compress.zstd.ZstdUtil;
 import org.vash.vate.net.jpountz.lz4.LZ4Utils;
-//import org.vash.vate.tls.VTTLSVerificationDisabler;
 
 @SuppressWarnings("deprecation")
 public class VTSystem
@@ -179,6 +178,11 @@ public class VTSystem
   
   static
   {
+    if (!initialized)
+    {
+      initialize();
+    }
+    
     int sampleSizeInBits = 16;
     int channels = 1;
     boolean signed = true;
@@ -202,11 +206,6 @@ public class VTSystem
     
     VT_ERA_DATEFORMAT = new SimpleDateFormat("G", Locale.ENGLISH);
     VT_YEAR_CALENDAR = Calendar.getInstance();
-    
-    if (!initialized)
-    {
-      initialize();
-    }
   }
   
   public static void initialize()
