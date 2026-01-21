@@ -2,6 +2,7 @@ package org.vash.vate.runtime;
 
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -10,28 +11,25 @@ import org.vash.vate.reflection.VTReflectionUtils;
 
 public class VTRuntimeProcess
 {
-  private String command;
+  private final String command;
+  private final ProcessBuilder builder;
+  private final ExecutorService executorService;
+  private final InputStream inputRedirect;
+  private final OutputStream outputRedirect;
+  private final boolean closeInputRedirect;
+  private final boolean closeOutputRedirect;
+  private boolean restart;
+  private final long timeout;
   
-  private ProcessBuilder builder;
   private Process process;
   private InputStream in;
   private InputStream err;
   private OutputStream out;
-  
-  // private VTRuntimeProcessKill killer = new VTRuntimeProcessKill();
   private VTRuntimeProcessDataRedirector outputDataRedirector;
   private VTRuntimeProcessDataRedirector inputDataRedirector;
   // private VTRuntimeProcessOutputConsumer errorConsumer;
   private VTRuntimeProcessExitListener exitListener;
   private VTRuntimeProcessTimeoutKill timeoutKill;
-  
-  private ExecutorService executorService;
-  private InputStream inputRedirect;
-  private OutputStream outputRedirect;
-  private boolean closeInputRedirect;
-  private boolean closeOutputRedirect;
-  private boolean restart;
-  private long timeout;
   
   private static Method processDestroyForciblyMethod;
   private static Method processWaitForMethod;
@@ -56,7 +54,6 @@ public class VTRuntimeProcess
     this.executorService = executorService;
     this.inputRedirect = inputRedirect;
     this.outputRedirect = outputRedirect;
-    
     this.closeOutputRedirect = closeOutputRedirect;
     this.closeInputRedirect = closeInputRedirect;
     this.restart = restart;
@@ -215,9 +212,16 @@ public class VTRuntimeProcess
   
   private void kill()
   {
-    if (process != null && isAlive(process))
+    if (timeoutKill != null)
     {
-      killProcess(process, 1);
+      try
+      {
+        timeoutKill.stop();
+      }
+      catch (Throwable e)
+      {
+        
+      }
     }
     
     if (inputDataRedirector != null)
@@ -237,18 +241,6 @@ public class VTRuntimeProcess
       try
       {
         outputDataRedirector.stop();
-      }
-      catch (Throwable e)
-      {
-        
-      }
-    }
-    
-    if (timeoutKill != null)
-    {
-      try
-      {
-        timeoutKill.stop();
       }
       catch (Throwable e)
       {
@@ -278,6 +270,11 @@ public class VTRuntimeProcess
       {
         
       }
+    }
+    
+    if (process != null && isAlive(process))
+    {
+      killProcess(process, 1);
     }
   }
   
@@ -316,33 +313,26 @@ public class VTRuntimeProcess
   private static long getProcessID(Process p)
   {
     long result = -1;
-//    try
-//    {
-//      // for windows
-//      if (p.getClass().getName().equals("java.lang.Win32Process") || p.getClass().getName().equals("java.lang.ProcessImpl"))
-//      {
-//        Field f = p.getClass().getDeclaredField("handle");
-//        f.setAccessible(true);
-//        long handl = f.getLong(p);
-//        Kernel32 kernel = Kernel32.INSTANCE;
-//        WinNT.HANDLE hand = new WinNT.HANDLE();
-//        hand.setPointer(Pointer.createConstant(handl));
-//        result = kernel.GetProcessId(hand);
-//        // f.setAccessible(false);
-//      }
-//      // for unix based operating systems
-//      else if (p.getClass().getName().equals("java.lang.UNIXProcess"))
-//      {
-//        Field f = p.getClass().getDeclaredField("pid");
-//        f.setAccessible(true);
-//        result = f.getLong(p);
-//        // f.setAccessible(false);
-//      }
-//    }
-//    catch (Throwable ex)
-//    {
-//      result = -1;
-//    }
+    try
+    {
+      // for windows
+      if (p.getClass().getName().equals("java.lang.Win32Process") || p.getClass().getName().equals("java.lang.ProcessImpl"))
+      {
+        
+      }
+      // for unix based operating systems
+      else if (p.getClass().getName().equals("java.lang.UNIXProcess"))
+      {
+        Field f = p.getClass().getDeclaredField("pid");
+        f.setAccessible(true);
+        result = f.getLong(p);
+        // f.setAccessible(false);
+      }
+    }
+    catch (Throwable ex)
+    {
+      result = -1;
+    }
     return result;
   }
   
@@ -377,7 +367,7 @@ public class VTRuntimeProcess
       if (forced != null && forced instanceof Process)
       {
         Process destroyed = (Process) forced;
-        Object result = processWaitForMethod.invoke(destroyed, new Object[] {Long.valueOf(1000), TimeUnit.MILLISECONDS});
+        Object result = processWaitForMethod.invoke(destroyed, new Object[] {Long.valueOf(10), TimeUnit.MILLISECONDS});
         if (result instanceof Boolean)
         {
           return (Boolean)result;
