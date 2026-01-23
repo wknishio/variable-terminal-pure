@@ -152,9 +152,9 @@ public class DefaultTerminalFactory implements TerminalFactory {
 	                return createTelnetTerminal();
 	            }
 	            if(isOperatingSystemWindows()) {
-	            	return createWindowsTerminal();
-	                //return createWindowsTerminal(outputStream, inputStream, charset);
-	            	//return createUnixTerminal(outputStream, inputStream, charset);
+	            	//return createWindowsTerminal();
+	              //return createWindowsTerminal(outputStream, inputStream, charset);
+	            	return createUnixTerminal(outputStream, inputStream, charset);
 	            }
 	            else {
 	                return createUnixTerminal(outputStream, inputStream, charset);
