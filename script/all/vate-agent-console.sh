@@ -1,1 +1,1 @@
-nohup java -cp vate-pure-all-console.jar org.vash.vate.client.startup.VTClientAgentGraphicalStart $* &
+java -cp vate-pure-all-console.jar org.vash.vate.client.startup.VTClientAgentGraphicalStart $*

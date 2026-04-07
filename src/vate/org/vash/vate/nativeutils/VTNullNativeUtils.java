@@ -116,4 +116,66 @@ public class VTNullNativeUtils implements VTNativeUtils
   {
     return !VTReflectionUtils.detectWindows();
   }
+  
+  public void echo(boolean enabled)
+  {
+    try
+    {
+      if (!enabled)
+      {
+        Runtime.getRuntime().exec(new String[] {"stty -echo < /dev/tty"});
+      }
+      else
+      {
+        Runtime.getRuntime().exec(new String[] {"stty echo < /dev/tty"});
+      }
+    }
+    catch (Throwable t)
+    {
+      
+    }
+  }
+  
+  public void icanon(boolean enabled)
+  {
+    try
+    {
+      if (!enabled)
+      {
+        Runtime.getRuntime().exec(new String[] {"stty -icanon < /dev/tty"});
+      }
+      else
+      {
+        Runtime.getRuntime().exec(new String[] {"stty icanon < /dev/tty"});
+      }
+    }
+    catch (Throwable t)
+    {
+      
+    }
+  }
+  
+  public void raw()
+  {
+    try
+    {
+      Runtime.getRuntime().exec(new String[] {"stty raw < /dev/tty"});
+    }
+    catch (Throwable t)
+    {
+      
+    }
+  }
+  
+  public void sane()
+  {
+    try
+    {
+      Runtime.getRuntime().exec(new String[] {"stty sane < /dev/tty"});
+    }
+    catch (Throwable t)
+    {
+      
+    }
+  }
 }
