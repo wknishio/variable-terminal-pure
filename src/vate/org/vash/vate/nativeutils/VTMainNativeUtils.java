@@ -2,6 +2,7 @@ package org.vash.vate.nativeutils;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.lang.reflect.Method;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -9,6 +10,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.Map.Entry;
 
 import org.vash.vate.audio.VTAudioBeeper;
+import org.vash.vate.com.martiansoftware.jsap.CommandLineTokenizerMKII;
 import org.vash.vate.filesystem.VTFileUtils;
 //import org.vash.vate.nativeutils.bsd.VTBSDNativeUtils;
 //import org.vash.vate.nativeutils.linux.VTLinuxNativeUtils;
@@ -21,7 +23,6 @@ import org.vash.vate.reflection.VTReflectionUtils;
 
 public class VTMainNativeUtils
 {
-  // private static String[] realEnvironmentVariablesBackup;
   private static String[] virtualEnvironmentVariablesBackup;
   private static String[] virtualEnvironmentVariables;
   private static Properties systemPropertiesBackup;
@@ -37,8 +38,6 @@ public class VTMainNativeUtils
   "        Exit For\r\n" + 
   "    End If\r\n" + 
   "Next\r\n" + 
-//  "WScript.Sleep(5000)\r\n" + 
-//  "WScript.Echo(\"5 seconds have passed.\")\r\n" + 
   "WScript.Quit";
   
   public synchronized static void initialize()
@@ -581,5 +580,46 @@ public class VTMainNativeUtils
     {
       nativeUtils.sane();
     }
+  }
+  
+  private static Method inheritIOMethod;
+  
+  static
+  {
+    try
+    {
+      inheritIOMethod = Class.forName("java.lang.ProcessBuilder").getDeclaredMethod("inheritIO");
+    }
+    catch (Throwable t)
+    {
+      inheritIOMethod = null;
+    }
+  }
+  
+  public static int executeProcess(boolean inheritIO, String... commands)
+  {
+    int status = -1;
+    try
+    {
+      ProcessBuilder process = null;
+      if (commands.length == 1)
+      {
+        process = new ProcessBuilder(CommandLineTokenizerMKII.tokenize(commands[0]));
+      }
+      else
+      {
+        process = new ProcessBuilder(commands);
+      }
+      if (inheritIOMethod != null && inheritIO)
+      {
+        process = (ProcessBuilder) inheritIOMethod.invoke(process);
+      }
+      status = process.start().waitFor();
+    }
+    catch (Throwable t)
+    {
+      
+    }
+    return status;
   }
 }
