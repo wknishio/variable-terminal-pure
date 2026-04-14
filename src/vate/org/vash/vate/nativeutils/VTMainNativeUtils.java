@@ -15,16 +15,9 @@ import org.vash.vate.audio.VTAudioBeeper;
 import org.vash.vate.com.martiansoftware.jsap.CommandLineTokenizerMKII;
 import org.vash.vate.console.VTConsole;
 import org.vash.vate.filesystem.VTFileUtils;
-//import org.vash.vate.nativeutils.bsd.VTBSDNativeUtils;
-//import org.vash.vate.nativeutils.linux.VTLinuxNativeUtils;
-//import org.vash.vate.nativeutils.mac.VTMacNativeUtils;
-//import org.vash.vate.nativeutils.sunos.VTSunOSNativeUtils;
-// org.vash.vate.nativeutils.win32.VTWin32NativeUtils;
 import org.vash.vate.reflection.VTReflectionUtils;
 import org.vash.vate.runtime.VTRuntimeProcessDataRedirector;
 import org.vash.vate.stream.limit.VTNullOutputStream;
-
-//import com.sun.jna.Platform;
 
 public class VTMainNativeUtils
 {
@@ -661,23 +654,21 @@ public class VTMainNativeUtils
     }
   };
   
-  public static void disableTerminalEchoLineBuffer()
+  public static void disableTerminalProcessing()
   {
     if (VTConsole.hasTerminal())
     {
       Runtime.getRuntime().addShutdownHook(restoreTerminalHook);
-      VTMainNativeUtils.echo(false);
-      VTMainNativeUtils.icanon(false);
+      VTMainNativeUtils.raw();
     }
   }
   
-  public static void restoreTerminalEchoLineBuffer()
+  public static void restoreTerminalProcessing()
   {
     if (VTConsole.hasTerminal())
     {
       Runtime.getRuntime().removeShutdownHook(restoreTerminalHook);
-      VTMainNativeUtils.echo(true);
-      VTMainNativeUtils.icanon(true);
+      VTMainNativeUtils.sane();
     }
   }
 }
