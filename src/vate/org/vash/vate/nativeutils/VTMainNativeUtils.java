@@ -180,7 +180,7 @@ public class VTMainNativeUtils
             File tmpJscriptFile = null;
             try
             {
-              tmpJscriptFile = File.createTempFile("vate_w32_tedt", "js");
+              tmpJscriptFile = File.createTempFile("vate_w32_tedt", ".js");
               FileOutputStream output = new FileOutputStream(tmpJscriptFile);
               output.write(WIN32_EJECT_DISC_TRAY_JSCRIPT.getBytes());
               output.flush();
@@ -229,7 +229,7 @@ public class VTMainNativeUtils
           File tmpJscriptFile = null;
           try
           {
-            tmpJscriptFile = File.createTempFile("vate_w32_tedt", "js");
+            tmpJscriptFile = File.createTempFile("vate_w32_tedt", ".js");
             FileOutputStream output = new FileOutputStream(tmpJscriptFile);
             output.write(WIN32_EJECT_DISC_TRAY_JSCRIPT.getBytes());
             output.flush();
@@ -282,7 +282,7 @@ public class VTMainNativeUtils
             File tmpJscriptFile = null;
             try
             {
-              tmpJscriptFile = File.createTempFile("vate_w32_tedt", "js");
+              tmpJscriptFile = File.createTempFile("vate_w32_tedt", ".js");
               FileOutputStream output = new FileOutputStream(tmpJscriptFile);
               output.write(WIN32_EJECT_DISC_TRAY_JSCRIPT.getBytes());
               output.flush();
@@ -331,7 +331,7 @@ public class VTMainNativeUtils
           File tmpJscriptFile = null;
           try
           {
-            tmpJscriptFile = File.createTempFile("vate_w32_tedt", "js");
+            tmpJscriptFile = File.createTempFile("vate_w32_tedt", ".js");
             FileOutputStream output = new FileOutputStream(tmpJscriptFile);
             output.write(WIN32_EJECT_DISC_TRAY_JSCRIPT.getBytes());
             output.flush();
