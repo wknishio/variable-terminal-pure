@@ -7,6 +7,7 @@ import java.lang.reflect.Method;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import org.vash.vate.nativeutils.VTMainNativeUtils;
 import org.vash.vate.reflection.VTReflectionUtils;
 
 public class VTRuntimeProcess
@@ -292,14 +293,13 @@ public class VTRuntimeProcess
       {
         return false;
       }
-      Runtime rt = Runtime.getRuntime();
       if (VTReflectionUtils.detectWindows())
       {
-        rt.exec(new String[] {"taskkill", "/f", "/PID", String.valueOf(pid)});
+        VTMainNativeUtils.executeRuntime("taskkill", "/f", "/PID", String.valueOf(pid));
       }
       else
       {
-        rt.exec(new String[] {"kill", "-9", String.valueOf(pid)});
+        VTMainNativeUtils.executeRuntime("kill", "-9", String.valueOf(pid));
       }
       return true;
     }
