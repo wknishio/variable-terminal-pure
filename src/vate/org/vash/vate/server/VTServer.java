@@ -39,6 +39,7 @@ public class VTServer implements Runnable
 {
   private static final Thread.UncaughtExceptionHandler uncaughtExceptionHandler = new VTUncaughtExceptionHandler();
   private final boolean managed;
+  private boolean daemon = false;
   private boolean passive = true;
   private String hostAddress = "";
   private Integer hostPort = null;
@@ -50,7 +51,7 @@ public class VTServer implements Runnable
   private String proxyPassword = "";
   private String encryptionType = "NONE";
   private byte[] encryptionKey = new byte[] {};
-  private boolean daemon = false;
+  
   private String sessionAccounts = "";
   private Integer sessionsMaximum;
   private String sessionShell = "";

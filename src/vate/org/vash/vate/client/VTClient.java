@@ -34,6 +34,8 @@ public class VTClient implements Runnable
 {
   private static final Thread.UncaughtExceptionHandler uncaughtExceptionHandler = new VTUncaughtExceptionHandler();
   private final boolean managed;
+  private boolean daemon = false;
+  private boolean agent = false;
   private boolean active = true;
   private String hostAddress = "";
   private Integer hostPort = null;
@@ -49,7 +51,6 @@ public class VTClient implements Runnable
   private String sessionPassword = "";
   private String sessionCommands = "";
   private String sessionShell = "";
-  private boolean daemon = false;
   private final String vtURL = System.getenv("VT_PATH");
   private final Runtime runtime = Runtime.getRuntime();
   private File clientSettingsFile;
@@ -229,6 +230,11 @@ public class VTClient implements Runnable
     VTMainConsole.setDaemon(daemon);
   }
   
+  public void setAgent(boolean agent)
+  {
+    this.agent = agent;
+  }
+  
   /* public String getAddress() { return address; } */
   
   public void setAddress(String address)
@@ -340,6 +346,11 @@ public class VTClient implements Runnable
   public boolean isDaemon()
   {
     return daemon;
+  }
+  
+  public boolean isAgent()
+  {
+    return agent;
   }
   
   public String getAddress()
