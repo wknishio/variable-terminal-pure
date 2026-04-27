@@ -5,9 +5,9 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
 
-import org.vash.vate.apache.commons.httpclient.ProxyClient;
-import org.vash.vate.apache.commons.httpclient.UsernamePasswordCredentials;
-import org.vash.vate.apache.commons.httpclient.auth.AuthScope;
+import org.vash.vate.org.apache.commons.httpclient.ProxyClient;
+import org.vash.vate.org.apache.commons.httpclient.UsernamePasswordCredentials;
+import org.vash.vate.org.apache.commons.httpclient.auth.AuthScope;
 
 public class VTHttpProxySocket extends VTProxySocket
 {
@@ -36,6 +36,7 @@ public class VTHttpProxySocket extends VTProxySocket
         if (proxyUser != null && proxyPassword != null && proxyUser.length() > 0 && proxyPassword.length() > 0)
         {
           httpProxyClient.getState().setProxyCredentials(AuthScope.ANY, new UsernamePasswordCredentials(proxyUser, proxyPassword));
+          httpProxyClient.getState().setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(proxyUser, proxyPassword));
           httpProxyClient.getParams().setAuthenticationPreemptive(true);
         }
         InetSocketAddress host = (InetSocketAddress) endpoint;
@@ -75,6 +76,7 @@ public class VTHttpProxySocket extends VTProxySocket
         if (proxyUser != null && proxyPassword != null && proxyUser.length() > 0 && proxyPassword.length() > 0)
         {
           httpProxyClient.getState().setProxyCredentials(AuthScope.ANY, new UsernamePasswordCredentials(proxyUser, proxyPassword));
+          httpProxyClient.getState().setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(proxyUser, proxyPassword));
           httpProxyClient.getParams().setAuthenticationPreemptive(true);
         }
         InetSocketAddress host = (InetSocketAddress) endpoint;
