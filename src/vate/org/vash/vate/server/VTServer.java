@@ -561,11 +561,11 @@ public class VTServer implements Runnable
       fileServerSettings.setProperty("vate.server.proxy.password", proxyPassword);
       fileServerSettings.setProperty("vate.server.encryption.type", encryptionType);
       fileServerSettings.setProperty("vate.server.encryption.password", new String(encryptionKey, "UTF-8"));
+      fileServerSettings.setProperty("vate.server.ping.limit", pingLimit > 0 ? String.valueOf(pingLimit) : "");
+      fileServerSettings.setProperty("vate.server.ping.interval", pingInterval > 0 ? String.valueOf(pingInterval) : "");
       fileServerSettings.setProperty("vate.server.session.shell", sessionShell);
       fileServerSettings.setProperty("vate.server.session.maximum", String.valueOf(sessionsMaximum == null ? "" : sessionsMaximum));
       fileServerSettings.setProperty("vate.server.session.accounts", sessionAccounts);
-      fileServerSettings.setProperty("vate.server.ping.interval", pingInterval > 0 ? String.valueOf(pingInterval) : "");
-      fileServerSettings.setProperty("vate.server.ping.limit", pingLimit > 0 ? String.valueOf(pingLimit) : "");
       
       FileOutputStream out = new FileOutputStream(settingsFile);
       VTPropertiesBuilder.saveProperties(out, fileServerSettings, VT_SERVER_SETTINGS_COMMENTS, "UTF-8");
@@ -1760,7 +1760,6 @@ public class VTServer implements Runnable
           {
             hostPort = 6060;
           }
-          
           VTMainConsole.print("VT>Use nat port in connection?(Y/N, default:N):");
           line = VTMainConsole.readLine(true);
           if (line == null)

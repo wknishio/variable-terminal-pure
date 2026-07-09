@@ -506,12 +506,12 @@ public class VTClient implements Runnable
       fileClientSettings.setProperty("vate.client.proxy.password", proxyPassword);
       fileClientSettings.setProperty("vate.client.encryption.type", encryptionType);
       fileClientSettings.setProperty("vate.client.encryption.password", new String(encryptionKey, "UTF-8"));
+      fileClientSettings.setProperty("vate.client.ping.limit", pingLimit > 0 ? String.valueOf(pingLimit) : "");
+      fileClientSettings.setProperty("vate.client.ping.interval", pingInterval > 0 ? String.valueOf(pingInterval) : "");
       fileClientSettings.setProperty("vate.client.session.commands", sessionCommands);
       fileClientSettings.setProperty("vate.client.session.shell", sessionShell);
       fileClientSettings.setProperty("vate.client.session.user", sessionUser);
       fileClientSettings.setProperty("vate.client.session.password", sessionPassword);
-      fileClientSettings.setProperty("vate.client.ping.interval", pingInterval > 0 ? String.valueOf(pingInterval) : "");
-      fileClientSettings.setProperty("vate.client.ping.limit", pingLimit > 0 ? String.valueOf(pingLimit) : "");
       
       FileOutputStream out = new FileOutputStream(settingsFile);
       VTPropertiesBuilder.saveProperties(out, fileClientSettings, VT_CLIENT_SETTINGS_COMMENTS, "UTF-8");
