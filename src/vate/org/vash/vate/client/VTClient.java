@@ -670,7 +670,7 @@ public class VTClient implements Runnable
       found = true;
       try
       {
-        tlsAuthentication = fileClientSettings.getProperty("vate.client.auhentication.type", encryptionType).toUpperCase().startsWith("T");
+        tlsAuthentication = fileClientSettings.getProperty("vate.client.auhentication.type", "").toUpperCase().startsWith("T");
       }
       catch (Throwable e)
       {
@@ -954,7 +954,7 @@ public class VTClient implements Runnable
       {
         try
         {
-          tlsAuthentication = fileClientSettings.getProperty("vate.client.auhentication.type", encryptionType).toUpperCase().startsWith("T");
+          tlsAuthentication = fileClientSettings.getProperty("vate.client.auhentication.type", "").toUpperCase().startsWith("T");
         }
         catch (Throwable e)
         {
@@ -1197,6 +1197,18 @@ public class VTClient implements Runnable
         {
           natPort = fileNatPort;
         }
+      }
+      catch (Throwable e)
+      {
+        
+      }
+    }
+    
+    if (fileClientSettings.getProperty("vate.client.auhentication.type") != null)
+    {
+      try
+      {
+        tlsAuthentication = fileClientSettings.getProperty("vate.client.auhentication.type", "").toUpperCase().startsWith("T");
       }
       catch (Throwable e)
       {
