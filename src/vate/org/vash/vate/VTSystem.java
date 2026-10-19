@@ -4,6 +4,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 import java.nio.charset.CharsetEncoder;
 import java.nio.charset.CodingErrorAction;
+import java.security.KeyPair;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -158,7 +159,8 @@ public class VTSystem
   
   private static final DateFormat VT_ERA_DATEFORMAT;
   private static final Calendar VT_YEAR_CALENDAR;
-    
+  
+  private static KeyPair VT_UNSAFE_TLS_KEYPAIR;
   private static SSLContext VT_UNSAFE_TLS_CONTEXT;
   
   private static boolean initialized = false;
@@ -185,11 +187,20 @@ public class VTSystem
     initialized = true;
   }
   
+  public static final KeyPair getUnsafeTLSKeyPair()
+  {
+    if (VT_UNSAFE_TLS_KEYPAIR == null)
+    {
+      VT_UNSAFE_TLS_KEYPAIR = VTTLSUtilities.createKeyPair("RSA", 2048, null);
+    }
+    return VT_UNSAFE_TLS_KEYPAIR;
+  }
+  
   public static final SSLContext getUnsafeTLSContext()
   {
     if (VT_UNSAFE_TLS_CONTEXT == null)
     {
-      VT_UNSAFE_TLS_CONTEXT = VTTLSUtilities.createUnsafeTLSContext("RSA", 2048, null);
+      VT_UNSAFE_TLS_CONTEXT = VTTLSUtilities.createUnsafeTLSContext(getUnsafeTLSKeyPair().getPrivate(), VTTLSUtilities.createSelfSignedTLSCertificateEncodedData(getUnsafeTLSKeyPair()));
     }
     return VT_UNSAFE_TLS_CONTEXT;
   }
